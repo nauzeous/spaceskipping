@@ -156,8 +156,8 @@ int main(){
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(f32), (void*)0);
     glEnableVertexAttribArray(0);
 
-    tree.upload_to_gpu();
-    printf("mem usage: %d KB \n", tree.nodes.size()*40 / 1000);
+    //tree.upload_to_gpu();
+    //printf("mem usage: %d KB \n", tree.nodes.size()*40 / 1000);
 
 
     f32 last_time = glfwGetTime();
@@ -177,6 +177,11 @@ int main(){
         processInput(window,camera_pos);
 
         if (accumulated_time >= FRAME_TIME){
+
+            float update_dt = current_time - last_update_time;
+            last_update_time = current_time;
+            accumulated_time = 0.f;
+
             // render
             // ------
             glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
